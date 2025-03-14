@@ -1,19 +1,14 @@
 package be.kdg.bejeweledtake2.view.game;
 
-import be.kdg.bejeweledtake2.model.BejeweledModel;
-import be.kdg.bejeweledtake2.model.Tile;
-import be.kdg.bejeweledtake2.model.TileStatus;
+import be.kdg.bejeweledtake2.model.*;
 import be.kdg.bejeweledtake2.view.options.OptionsPresenter;
 import be.kdg.bejeweledtake2.view.options.OptionsView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -28,6 +23,7 @@ public class GamePresenter {
         updateView();
     }
     private void updateView() {
+        view.getGameGrid().getChildren().clear();
         for (int x = 0; x < 8; x++) {
             for (int y = 0; y < 8; y++) {
                 Tile currentTile = this.model.getCurrentGame().getPlayingField()[x][y];
@@ -35,42 +31,46 @@ public class GamePresenter {
 
                 huidigeButton.setMinSize(51*view.SCREEN_RATIO, 51*view.SCREEN_RATIO);
                 
-                int gemColorImage = 0;
+                int gemIndex = 0;
                 switch (currentTile.getGem().getGemColor()){
                     case BLUE:
-                        gemColorImage = 0;
+                        gemIndex = 0;
                         break;
                     case RED:
-                        gemColorImage = 5;
+                        gemIndex = 5;
                         break;
                     case YELLOW:
-                        gemColorImage =  6;
+                        gemIndex =  6;
                         break;
                     case GREEN:
-                        gemColorImage = 1;
+                        gemIndex = 1;
                         break;
                     case PINK:
-                        gemColorImage = 2;
+                        gemIndex = 2;
                         break;
                     case WHITE:
-                        gemColorImage = 3;
+                        gemIndex = 3;
                         break;
                     case ORANGE:
-                        gemColorImage = 4;
+                        gemIndex = 4;
                         break;
                     case NONE:
-                        gemColorImage = 0;
+                        gemIndex = 0;
                         break;
                 }
 
                 Image[] normalGems = {view.imgBlueGem, view.imgGreenGem, view.imgPinkGem, view.imgWhiteGem, view.imgOrangeGem, view.imgRedGem, view.imgYellowGem};
                 Image[] animatedGems = {view.imgBlueGemAnim, view.imgGreenGemAnim, view.imgPinkGemAnim, view.imgWhiteGemAnim, view.imgOrangeGemAnim, view.imgRedGemAnim, view.imgYellowGemAnim};
-                
-                if (currentTile.getStatus() == TileStatus.SELECTED) {
-                    huidigeButton.setBackground(new Background(new BackgroundImage(animatedGems[gemColorImage], BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+                Image[] bombGems = {view.imgBlueGemBomb, view.imgGreenGemBomb, view.imgPinkGemBomb, view.imgWhiteGemBomb, view.imgOrangeGemBomb, view.imgRedGemBomb, view.imgYellowGemBomb};
+
+                if (currentTile.getGem().getGemMutation() == GemMutation.BOMB){
+                    huidigeButton.setBackground(new Background(new BackgroundImage(bombGems[gemIndex], BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+                }
+                else if (currentTile.getStatus() == TileStatus.SELECTED) {
+                    huidigeButton.setBackground(new Background(new BackgroundImage(animatedGems[gemIndex], BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
                 }
                 else {
-                    huidigeButton.setBackground(new Background(new BackgroundImage(normalGems[gemColorImage], BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+                    huidigeButton.setBackground(new Background(new BackgroundImage(normalGems[gemIndex], BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
                 }
 
                 int mijnX = x;
@@ -86,6 +86,7 @@ public class GamePresenter {
                         updateView();
                     }
                 });
+                view.getGameGrid().getChildren();
                 view.getGameGrid().add(huidigeButton, x, y);
             }
         }
@@ -95,6 +96,8 @@ public class GamePresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 System.out.println("geklikt op new game");
+                model.newGame();
+                updateView();
             }
         });
 

@@ -47,6 +47,13 @@ public class GameView extends BorderPane {
     Image imgRedGemAnim;
     Image imgWhiteGemAnim;
     Image imgYellowGemAnim;
+    Image imgBlueGemBomb;
+    Image imgGreenGemBomb;
+    Image imgOrangeGemBomb;
+    Image imgPinkGemBomb;
+    Image imgRedGemBomb;
+    Image imgWhiteGemBomb;
+    Image imgYellowGemBomb;
     GridPane gameGrid;
 
     public Label getLblScore() {return lblScore;}
@@ -69,6 +76,7 @@ public class GameView extends BorderPane {
         this.lblScoreBall = new Label();
         this.btnQuitGame = new Button();
         this.lblTimer = new Label();
+
         this.imgBlueGem = new Image(getClass().getResourceAsStream("/gameAssets/Gems/BlueGem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
         this.imgGreenGem = new Image(getClass().getResourceAsStream("/gameAssets/Gems/GreenGem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
         this.imgOrangeGem = new Image(getClass().getResourceAsStream("/gameAssets/Gems/OrangeGem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
@@ -84,6 +92,14 @@ public class GameView extends BorderPane {
         this.imgRedGemAnim = new Image(getClass().getResourceAsStream("/gameAssets/AnimatedGems/RedGemAnim.gif"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
         this.imgWhiteGemAnim = new Image(getClass().getResourceAsStream("/gameAssets/AnimatedGems/WhiteGemAnim.gif"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, false);
         this.imgYellowGemAnim = new Image(getClass().getResourceAsStream("/gameAssets/AnimatedGems/YellowGemAnim.gif"),50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, false);
+
+        this.imgBlueGemBomb = new Image(getClass().getResourceAsStream("/gameAssets/BombGems/Blue_Bomb_Gem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgGreenGemBomb = new Image(getClass().getResourceAsStream("/gameAssets/BombGems/Green_Bomb_Gem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgOrangeGemBomb = new Image(getClass().getResourceAsStream("/gameAssets/BombGems/Orange_Bomb_Gem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgPinkGemBomb = new Image(getClass().getResourceAsStream("/gameAssets/BombGems/Pink_Bomb_Gem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgRedGemBomb = new Image(getClass().getResourceAsStream("/gameAssets/BombGems/Red_Bomb_Gem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgWhiteGemBomb = new Image(getClass().getResourceAsStream("/gameAssets/BombGems/White_Bomb_Gem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, false);
+        this.imgYellowGemBomb = new Image(getClass().getResourceAsStream("/gameAssets/BombGems/Yellow_Bomb_Gem.png"),50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, false);
 
         this.gameGrid = new GridPane();
     }

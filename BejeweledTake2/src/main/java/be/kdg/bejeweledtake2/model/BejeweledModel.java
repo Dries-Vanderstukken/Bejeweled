@@ -12,8 +12,8 @@ public class BejeweledModel {
         return currentGame;
     }
 
-    public void setCurrentGame(Game currentGame) {
-        this.currentGame = currentGame;
+    public void newGame() {
+         currentGame = new Game();
     }
 
 }

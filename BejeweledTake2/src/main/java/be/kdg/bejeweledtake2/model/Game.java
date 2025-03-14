@@ -95,6 +95,6 @@ public class Game {
     }
 
     public void tileClicked(int x,int y){
-
+        playingField[x][y].setStatus(TileStatus.SELECTED);
     }
 }
