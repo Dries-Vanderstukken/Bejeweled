@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -20,6 +21,7 @@ public class GamePresenter {
     private BejeweledModel model;
     private GameView view;
     public GamePresenter(BejeweledModel model, GameView view) {
+        System.out.println("bruh presetntde");
         this.model = model;
         this.view = view;
         addEventHandlers();
@@ -30,17 +32,47 @@ public class GamePresenter {
             for (int y = 0; y < 8; y++) {
                 Tile currentTile = this.model.getCurrentGame().getPlayingField()[x][y];
                 Button huidigeButton = new Button();
-                huidigeButton.setPrefWidth(51*view.SCREEN_RATIO);
-                huidigeButton.setPrefHeight(51*view.SCREEN_RATIO);
 
+                huidigeButton.setMinSize(51*view.SCREEN_RATIO, 51*view.SCREEN_RATIO);
+                
+                int gemColorImage = 0;
+                switch (currentTile.getGem().getGemColor()){
+                    case BLUE:
+                        gemColorImage = 0;
+                        break;
+                    case RED:
+                        gemColorImage = 5;
+                        break;
+                    case YELLOW:
+                        gemColorImage =  6;
+                        break;
+                    case GREEN:
+                        gemColorImage = 1;
+                        break;
+                    case PINK:
+                        gemColorImage = 2;
+                        break;
+                    case WHITE:
+                        gemColorImage = 3;
+                        break;
+                    case ORANGE:
+                        gemColorImage = 4;
+                        break;
+                    case NONE:
+                        gemColorImage = 0;
+                        break;
+                }
+
+                Image[] normalGems = {view.imgBlueGem, view.imgGreenGem, view.imgPinkGem, view.imgWhiteGem, view.imgOrangeGem, view.imgRedGem, view.imgYellowGem};
+                Image[] animatedGems = {view.imgBlueGemAnim, view.imgGreenGemAnim, view.imgPinkGemAnim, view.imgWhiteGemAnim, view.imgOrangeGemAnim, view.imgRedGemAnim, view.imgYellowGemAnim};
+                
                 if (currentTile.getStatus() == TileStatus.SELECTED) {
-                    huidigeButton.setBackground(new Background(new BackgroundImage(view.imgBlueGemAnim, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+                    huidigeButton.setBackground(new Background(new BackgroundImage(animatedGems[gemColorImage], BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
                 }
                 else {
-                    huidigeButton.setBackground(new Background(new BackgroundImage(view.imgBlueGem, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+                    huidigeButton.setBackground(new Background(new BackgroundImage(normalGems[gemColorImage], BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
                 }
 
-                huidigeButton.setFont(new Font("Arial", 20));
                 int mijnX = x;
                 int mijnY = y;
                 huidigeButton.setOnAction(new EventHandler<ActionEvent>() {
