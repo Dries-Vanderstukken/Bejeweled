@@ -4,6 +4,10 @@ public class Score {
     private int score;
     private String playerName;
 
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public int getScore() {
         return score;
     }
