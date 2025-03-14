@@ -15,6 +15,7 @@ import javafx.scene.text.TextAlignment;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.Objects;
 
 public class ScoresView extends BorderPane {
 
@@ -53,9 +54,9 @@ public class ScoresView extends BorderPane {
         final double SCREEN_RATIO = Math.min(WIDTH_RATIO, HEIGHT_RATIO)-0.1;
 
         //images
-        Image imgBackground = new Image(getClass().getResourceAsStream("/scoresAssets/Background.png"), 2039 * SCREEN_RATIO, 1755*SCREEN_RATIO, true, true);
-        Image imgHighscores = new Image(getClass().getResourceAsStream("/scoresAssets/highscores.png"), 1582 * SCREEN_RATIO*0.9, 1294 * SCREEN_RATIO*0.9, true, true);
-        Image imgMainMenuButton = new Image(getClass().getResourceAsStream("/scoresAssets/main menu button.png"), 520 * SCREEN_RATIO, 119 * SCREEN_RATIO, true, true);
+        Image imgBackground = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/scoresAssets/Background.png")), 2039 * SCREEN_RATIO, 1755*SCREEN_RATIO, true, true);
+        Image imgHighscores = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/scoresAssets/highscores.png")), 1582 * SCREEN_RATIO*0.9, 1294 * SCREEN_RATIO*0.9, true, true);
+        Image imgMainMenuButton = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/scoresAssets/main menu button.png")), 520 * SCREEN_RATIO, 119 * SCREEN_RATIO, true, true);
 
         //main menu button
         FlowPane button = new FlowPane();

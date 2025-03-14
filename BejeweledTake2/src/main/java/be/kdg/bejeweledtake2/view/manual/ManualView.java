@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
+import java.util.Objects;
+
 public class ManualView extends BorderPane {
 
     Button btnExit;
@@ -58,7 +60,7 @@ public class ManualView extends BorderPane {
         this.setMaxSize(1920, 1010);
 
         // Load the background image
-        Image backgroundImage = new Image(getClass().getResourceAsStream("/optionsAssets/Options menu.png"),300*2, 189*2, true, true); // Use the correct path to your image
+        Image backgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/optionsAssets/Options menu.png")),300*2, 189*2, true, true); // Use the correct path to your image
         BackgroundImage myBackground = new BackgroundImage(
                 backgroundImage,
                 null, // No specific repeat

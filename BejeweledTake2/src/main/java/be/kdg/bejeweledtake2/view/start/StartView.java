@@ -8,6 +8,7 @@ import javafx.scene.layout.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 public class StartView extends BorderPane {
 
@@ -33,7 +34,7 @@ public class StartView extends BorderPane {
         final double HEIGHT_RATIO = (screenSize.getHeight() / 240);
         final double SCREEN_RATIO = Math.min(WIDTH_RATIO, HEIGHT_RATIO)-0.1;
 
-        Image startScreen = new Image(getClass().getResourceAsStream("/startAssets/BejeweledStartScreen.png"));
+        Image startScreen = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/startAssets/BejeweledStartScreen.png")));
 
         // Figured these out based on a maximized window, won't be correct position on a different size
         btnPlay.setPrefHeight(60);

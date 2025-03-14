@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
+import java.util.Objects;
+
 public class CreditsView extends BorderPane {
 
     Button btnExit;
@@ -23,7 +25,7 @@ public class CreditsView extends BorderPane {
     }
 
     private void layoutNodes() {
-        String creditsText = new String("We are:  Dries (Bronze 2 9 LP, critically acclaimed briar midlane player),\n" +
+        String creditsText = "We are:  Dries (Bronze 2 9 LP, critically acclaimed briar midlane player),\n" +
                 "and: Sam (Bronze 4 0 LP, jacking off all trades since '07),\n" +
                 "2 college students doing ACS at Karel De Grote Hoge School.\n\n" +
                 "This game is our simplified version of Bejeweled™ (by Popcap Games©) made in JavaFX.\n" +
@@ -34,7 +36,7 @@ public class CreditsView extends BorderPane {
                 "Game screen, Highscores \tDries\n" +
                 "Settings, Info screens \t\tSam\n" +
                 "Game Logic\t\t\t\tSam & Dries\n" +
-                "Peer tutors \t\t\t\tRob & Seppe");
+                "Peer tutors \t\t\t\tRob & Seppe";
         Label label = new Label(creditsText);
         label.setWrapText(true); // Enable text wrapping
         label.setAlignment(Pos.CENTER); // Properly centers the label text inside the label
@@ -62,7 +64,7 @@ public class CreditsView extends BorderPane {
         this.setMaxSize(1920, 1010);
 
         // Load the background image
-        Image backgroundImage = new Image(getClass().getResourceAsStream("/optionsAssets/Options menu.png"),300*2, 189*2, true, true); // Use the correct path to your image
+        Image backgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/optionsAssets/Options menu.png")),300*2, 189*2, true, true); // Use the correct path to your image
         BackgroundImage myBackground = new BackgroundImage(
                 backgroundImage,
                 null, // No specific repeat

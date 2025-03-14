@@ -10,11 +10,14 @@ public class Tile {
 
     private final int row;
 
-    public Tile(TileStatus status, int row, int column) {
+    public Tile(TileStatus status, int column, int row) {
         this.status = status;
         this.column = column;
         this.row = row;
 
+    }
+    public void setGem(Gem gem) {
+        this.gem = gem;
     }
 
     public int getColumn(){
@@ -28,9 +31,7 @@ public class Tile {
         return gem;
     }
 
-    public void setGem(Gem gem) {
-        this.gem = gem;
-    }
+
 
     public TileStatus getStatus() {
         return status;
@@ -39,4 +40,10 @@ public class Tile {
     public void setStatus(TileStatus status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return ("TileAt("+column+","+row+")");
+    }
+
 }

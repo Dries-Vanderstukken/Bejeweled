@@ -13,6 +13,8 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
+import java.util.Objects;
+
 public class OptionsView extends BorderPane {
 
     Slider sldrVolume;
@@ -77,7 +79,7 @@ public class OptionsView extends BorderPane {
         manualCenterer.getChildren().add(btnManual);
         GridPane.setHalignment(btnManual, HPos.CENTER);
 
-        Image backgroundImage = new Image(getClass().getResourceAsStream("/optionsAssets/Options menu.png"),300*2, 189*2, true, true);
+        Image backgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/optionsAssets/Options menu.png")),300*2, 189*2, true, true);
         // Makes it fill the entire area:
         BackgroundSize newSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, false);
         BackgroundImage backgroundImageImage = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER,newSize);

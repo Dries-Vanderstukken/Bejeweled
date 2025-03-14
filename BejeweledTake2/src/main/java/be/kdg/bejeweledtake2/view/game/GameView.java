@@ -17,6 +17,7 @@ import javafx.scene.text.TextAlignment;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.Objects;
 
 public class GameView extends BorderPane {
     //getting screensize so you can resize everything according to the screen resolution
@@ -77,43 +78,43 @@ public class GameView extends BorderPane {
         this.btnQuitGame = new Button();
         this.lblTimer = new Label();
 
-        this.imgBlueGem = new Image(getClass().getResourceAsStream("/gameAssets/Gems/BlueGem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
-        this.imgGreenGem = new Image(getClass().getResourceAsStream("/gameAssets/Gems/GreenGem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
-        this.imgOrangeGem = new Image(getClass().getResourceAsStream("/gameAssets/Gems/OrangeGem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
-        this.imgPinkGem = new Image(getClass().getResourceAsStream("/gameAssets/Gems/PinkGem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
-        this.imgRedGem = new Image(getClass().getResourceAsStream("/gameAssets/Gems/RedGem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
-        this.imgWhiteGem = new Image(getClass().getResourceAsStream("/gameAssets/Gems/WhiteGem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, false);
-        this.imgYellowGem = new Image(getClass().getResourceAsStream("/gameAssets/Gems/YellowGem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, false);
+        this.imgBlueGem = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/Gems/BlueGem.png")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgGreenGem = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/Gems/GreenGem.png")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgOrangeGem = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/Gems/OrangeGem.png")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgPinkGem = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/Gems/PinkGem.png")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgRedGem = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/Gems/RedGem.png")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgWhiteGem = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/Gems/WhiteGem.png")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, false);
+        this.imgYellowGem = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/Gems/YellowGem.png")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, false);
 
-        this.imgBlueGemAnim = new Image(getClass().getResourceAsStream("/gameAssets/AnimatedGems/BlueGemAnim.gif"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
-        this.imgGreenGemAnim = new Image(getClass().getResourceAsStream("/gameAssets/AnimatedGems/GreenGemAnim.gif"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
-        this.imgOrangeGemAnim = new Image(getClass().getResourceAsStream("/gameAssets/AnimatedGems/OrangeGemAnim.gif"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
-        this.imgPinkGemAnim = new Image(getClass().getResourceAsStream("/gameAssets/AnimatedGems/PinkGemAnim.gif"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
-        this.imgRedGemAnim = new Image(getClass().getResourceAsStream("/gameAssets/AnimatedGems/RedGemAnim.gif"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
-        this.imgWhiteGemAnim = new Image(getClass().getResourceAsStream("/gameAssets/AnimatedGems/WhiteGemAnim.gif"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, false);
-        this.imgYellowGemAnim = new Image(getClass().getResourceAsStream("/gameAssets/AnimatedGems/YellowGemAnim.gif"),50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, false);
+        this.imgBlueGemAnim = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/AnimatedGems/BlueGemAnim.gif")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgGreenGemAnim = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/AnimatedGems/GreenGemAnim.gif")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgOrangeGemAnim = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/AnimatedGems/OrangeGemAnim.gif")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgPinkGemAnim = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/AnimatedGems/PinkGemAnim.gif")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgRedGemAnim = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/AnimatedGems/RedGemAnim.gif")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgWhiteGemAnim = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/AnimatedGems/WhiteGemAnim.gif")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, false);
+        this.imgYellowGemAnim = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/AnimatedGems/YellowGemAnim.gif")),50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, false);
 
-        this.imgBlueGemBomb = new Image(getClass().getResourceAsStream("/gameAssets/BombGems/Blue_Bomb_Gem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
-        this.imgGreenGemBomb = new Image(getClass().getResourceAsStream("/gameAssets/BombGems/Green_Bomb_Gem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
-        this.imgOrangeGemBomb = new Image(getClass().getResourceAsStream("/gameAssets/BombGems/Orange_Bomb_Gem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
-        this.imgPinkGemBomb = new Image(getClass().getResourceAsStream("/gameAssets/BombGems/Pink_Bomb_Gem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
-        this.imgRedGemBomb = new Image(getClass().getResourceAsStream("/gameAssets/BombGems/Red_Bomb_Gem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
-        this.imgWhiteGemBomb = new Image(getClass().getResourceAsStream("/gameAssets/BombGems/White_Bomb_Gem.png"), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, false);
-        this.imgYellowGemBomb = new Image(getClass().getResourceAsStream("/gameAssets/BombGems/Yellow_Bomb_Gem.png"),50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, false);
+        this.imgBlueGemBomb = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/BombGems/Blue_Bomb_Gem.png")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgGreenGemBomb = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/BombGems/Green_Bomb_Gem.png")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgOrangeGemBomb = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/BombGems/Orange_Bomb_Gem.png")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgPinkGemBomb = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/BombGems/Pink_Bomb_Gem.png")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgRedGemBomb = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/BombGems/Red_Bomb_Gem.png")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
+        this.imgWhiteGemBomb = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/BombGems/White_Bomb_Gem.png")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, false);
+        this.imgYellowGemBomb = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/BombGems/Yellow_Bomb_Gem.png")),50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, false);
 
         this.gameGrid = new GridPane();
     }
 
     private void layoutNodes() {
         //Images
-        Image imgNewGame = new Image(getClass().getResourceAsStream("/gameAssets/BejeweledNewGameButton.png"), 150 * SCREEN_RATIO*1.3, 35 * SCREEN_RATIO*1.3, true, true);
-        Image imgOptions = new Image(getClass().getResourceAsStream("/gameAssets/BejeweledOptionsButton.png"), 150 * SCREEN_RATIO*1.3, 35 * SCREEN_RATIO*1.3, true, true);
-        Image imgQuitGame = new Image(getClass().getResourceAsStream("/gameAssets/BejeweledQuitGameButton.png"), 150 * SCREEN_RATIO*1.3, 35 * SCREEN_RATIO*1.3, true, true);
-        Image imgScore = new Image(getClass().getResourceAsStream("/gameAssets/BejeweledScore.png"), 183 * SCREEN_RATIO*1.3, 87 * SCREEN_RATIO*1.3, true, true);
-        Image imgBejLogo = new Image(getClass().getResourceAsStream("/gameAssets/BejeweledLogo.png"), 184 * SCREEN_RATIO*1.3, 56 * SCREEN_RATIO*1.3, true, true);
-        Image imgBall = new Image(getClass().getResourceAsStream("/gameAssets/BejeweledBall.png"), 122 * SCREEN_RATIO*1.3, 118 * SCREEN_RATIO*1.3, true, true);
-        Image imgBackground = new Image(getClass().getResourceAsStream("/gameAssets/Background.png"), screenSize.getWidth(), screenSize.getHeight(), false, false);
-        Image imgGrid = new Image(getClass().getResourceAsStream("/gameAssets/BejeweledClassicGrid.png"), 435 * SCREEN_RATIO, 423 * SCREEN_RATIO, true, true);
+        Image imgNewGame = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/BejeweledNewGameButton.png")), 150 * SCREEN_RATIO*1.3, 35 * SCREEN_RATIO*1.3, true, true);
+        Image imgOptions = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/BejeweledOptionsButton.png")), 150 * SCREEN_RATIO*1.3, 35 * SCREEN_RATIO*1.3, true, true);
+        Image imgQuitGame = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/BejeweledQuitGameButton.png")), 150 * SCREEN_RATIO*1.3, 35 * SCREEN_RATIO*1.3, true, true);
+        Image imgScore = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/BejeweledScore.png")), 183 * SCREEN_RATIO*1.3, 87 * SCREEN_RATIO*1.3, true, true);
+        Image imgBejLogo = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/BejeweledLogo.png")), 184 * SCREEN_RATIO*1.3, 56 * SCREEN_RATIO*1.3, true, true);
+        Image imgBall = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/BejeweledBall.png")), 122 * SCREEN_RATIO*1.3, 118 * SCREEN_RATIO*1.3, true, true);
+        Image imgBackground = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/Background.png")), screenSize.getWidth(), screenSize.getHeight(), false, false);
+        Image imgGrid = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/BejeweledClassicGrid.png")), 435 * SCREEN_RATIO, 423 * SCREEN_RATIO, true, true);
 
         //Background
         Background gameBackground = new Background(new BackgroundImage(imgBackground, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, new BackgroundPosition(Side.LEFT,0,false, Side.BOTTOM, 0, false), BackgroundSize.DEFAULT));
