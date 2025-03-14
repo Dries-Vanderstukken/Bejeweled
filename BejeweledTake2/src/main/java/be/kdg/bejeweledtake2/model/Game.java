@@ -22,7 +22,7 @@ public class Game {
         // checkSurroundings(5,5);
         printField();
         System.out.println("RANDOM COLOUR HERE:" + colorRandomizer());
-        checkMatch(playingField[5][5]);
+        checkAlreadyMatching(playingField[5][5]);
     }
 
     public GemColor colorRandomizer(){
@@ -47,12 +47,17 @@ public class Game {
         System.out.println("done");
     }
 
-    public void checkMatch(Tile checkingTile){
+    public void checkAlreadyMatching(Tile checkingTile){
         System.out.println(checkingTile.getGem().getGemColor());
+        Integer[][] matches;
+        matches = new Integer[64][2];
+
         for (Tile[] column :playingField){
             for (Tile tile : column){
                 if(tile.getGem().getGemColor() == checkingTile.getGem().getGemColor()){
                     System.out.println("We've got one of the same colour! It's in row " + tile.getRow() + " in column " + tile.getColumn() );
+                    matches[1] = new Integer[]{1, 2};
+
                     if(tile.getRow() == checkingTile.getRow()){
                         System.out.println("We've got one of the same color in the same row here at row " + checkingTile.getRow());
                     }
