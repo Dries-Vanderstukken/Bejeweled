@@ -33,6 +33,19 @@ public class GameView extends BorderPane {
     Label lblScoreBall;
     Button btnQuitGame;
     Label lblTimer;
+    Image imgBlueGem;
+    Image imgGreenGem;
+    Image imgOrangeGem;
+    Image imgPinkGem;
+    Image imgRedGem;
+    Image imgWhiteGem;
+    Image imgBlueGemAnim;
+    Image imgGreenGemAnim;
+    Image imgOrangeGemAnim;
+    Image imgPinkGemAnim;
+    Image imgRedGemAnim;
+    Image imgWhiteGemAnim;
+    GridPane gameGrid;
 
     public Label getLblScore() {return lblScore;}
     public Button getBtnNewGame() {return btnNewGame;}
@@ -40,6 +53,7 @@ public class GameView extends BorderPane {
     public Label getLblScoreBall() {return lblScoreBall;}
     public Button getBtnQuitGame() {return btnQuitGame;}
     public Label getLblTimer() {return lblTimer;}
+    public GridPane getGameGrid() {return gameGrid;}
 
     public GameView(){
         initialiseNodes();
@@ -53,6 +67,21 @@ public class GameView extends BorderPane {
         this.lblScoreBall = new Label();
         this.btnQuitGame = new Button();
         this.lblTimer = new Label();
+        this.imgBlueGem = new Image(getClass().getResourceAsStream("/gameAssets/Gems/BlueGem.png"), 51 * SCREEN_RATIO, 51 * SCREEN_RATIO, true, true);
+        this.imgGreenGem = new Image(getClass().getResourceAsStream("/gameAssets/Gems/GreenGem.png"), 51 * SCREEN_RATIO, 51 * SCREEN_RATIO, true, true);
+        this.imgOrangeGem = new Image(getClass().getResourceAsStream("/gameAssets/Gems/OrangeGem.png"), 51 * SCREEN_RATIO, 51 * SCREEN_RATIO, true, true);
+        this.imgPinkGem = new Image(getClass().getResourceAsStream("/gameAssets/Gems/PinkGem.png"), 51 * SCREEN_RATIO, 51 * SCREEN_RATIO, true, true);
+        this.imgRedGem = new Image(getClass().getResourceAsStream("/gameAssets/Gems/RedGem.png"), 51 * SCREEN_RATIO, 51 * SCREEN_RATIO, true, true);
+        this.imgWhiteGem = new Image(getClass().getResourceAsStream("/gameAssets/Gems/WhiteGem.png"), 51 * SCREEN_RATIO, 51 * SCREEN_RATIO, true, false);
+
+        this.imgBlueGemAnim = new Image(getClass().getResourceAsStream("/gameAssets/AnimatedGems/BlueGemAnim.gif"), 51 * SCREEN_RATIO, 51 * SCREEN_RATIO, true, true);
+        this.imgGreenGemAnim = new Image(getClass().getResourceAsStream("/gameAssets/AnimatedGems/GreenGemAnim.gif"), 51 * SCREEN_RATIO, 51 * SCREEN_RATIO, true, true);
+        this.imgOrangeGemAnim = new Image(getClass().getResourceAsStream("/gameAssets/AnimatedGems/OrangeGemAnim.gif"), 51 * SCREEN_RATIO, 51 * SCREEN_RATIO, true, true);
+        this.imgPinkGemAnim = new Image(getClass().getResourceAsStream("/gameAssets/AnimatedGems/PinkGemAnim.gif"), 51 * SCREEN_RATIO, 51 * SCREEN_RATIO, true, true);
+        this.imgRedGemAnim = new Image(getClass().getResourceAsStream("/gameAssets/AnimatedGems/RedGemAnim.gif"), 51 * SCREEN_RATIO, 51 * SCREEN_RATIO, true, true);
+        this.imgWhiteGemAnim = new Image(getClass().getResourceAsStream("/gameAssets/AnimatedGems/WhiteGemAnim.gif"), 51 * SCREEN_RATIO, 51 * SCREEN_RATIO, true, false);
+
+        this.gameGrid = new GridPane();
     }
 
     private void layoutNodes() {
@@ -65,15 +94,6 @@ public class GameView extends BorderPane {
         Image imgBall = new Image(getClass().getResourceAsStream("/gameAssets/BejeweledBall.png"), 122 * SCREEN_RATIO*1.3, 118 * SCREEN_RATIO*1.3, true, true);
         Image imgBackground = new Image(getClass().getResourceAsStream("/gameAssets/Background.png"), screenSize.getWidth(), screenSize.getHeight(), false, false);
         Image imgGrid = new Image(getClass().getResourceAsStream("/gameAssets/BejeweledClassicGrid.png"), 435 * SCREEN_RATIO, 423 * SCREEN_RATIO, true, true);
-
-        //GEMS
-        //(gaat waarschijnlijk vervangen worden met gewone afbeeldingen, en enkel de geselecteerde is een gif)
-        Image imgBlueGem = new Image(getClass().getResourceAsStream("/gameAssets/BlueGem.gif"), 51 * SCREEN_RATIO, 51 * SCREEN_RATIO, true, true);
-        Image imgGreenGem = new Image(getClass().getResourceAsStream("/gameAssets/GreenGem.gif"), 51 * SCREEN_RATIO, 51 * SCREEN_RATIO, true, true);
-        Image imgOrangeGem = new Image(getClass().getResourceAsStream("/gameAssets/OrangeGem.gif"), 51 * SCREEN_RATIO, 51 * SCREEN_RATIO, true, true);
-        Image imgPinkGem = new Image(getClass().getResourceAsStream("/gameAssets/PinkGem.gif"), 51 * SCREEN_RATIO, 51 * SCREEN_RATIO, true, true);
-        Image imgRedGem = new Image(getClass().getResourceAsStream("/gameAssets/RedGem.gif"), 51 * SCREEN_RATIO, 51 * SCREEN_RATIO, true, true);
-        Image imgWhiteGem = new Image(getClass().getResourceAsStream("/gameAssets/WhiteGem.gif"), 51 * SCREEN_RATIO, 51 * SCREEN_RATIO, true, false);
 
         //Background
         Background gameBackground = new Background(new BackgroundImage(imgBackground, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, new BackgroundPosition(Side.LEFT,0,false, Side.BOTTOM, 0, false), BackgroundSize.DEFAULT));
@@ -132,9 +152,7 @@ public class GameView extends BorderPane {
         gridImage.setMaxHeight(imgGrid.getHeight());
         gridImage.setMaxWidth(imgGrid.getWidth());
 
-        GridPane mijnGrid = new GridPane();
-
-        mijnGrid.setPadding(new javafx.geometry.Insets(7*SCREEN_RATIO, 16*SCREEN_RATIO, 8*SCREEN_RATIO, 11*SCREEN_RATIO));
+        gameGrid.setPadding(new javafx.geometry.Insets(7*SCREEN_RATIO, 16*SCREEN_RATIO, 8*SCREEN_RATIO, 11*SCREEN_RATIO));
 
         //make timer show above the grid
         BorderPane gridPlusTime = new BorderPane();

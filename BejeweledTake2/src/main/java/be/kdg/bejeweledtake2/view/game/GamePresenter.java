@@ -1,11 +1,18 @@
 package be.kdg.bejeweledtake2.view.game;
 
 import be.kdg.bejeweledtake2.model.BejeweledModel;
+import be.kdg.bejeweledtake2.model.Tile;
+import be.kdg.bejeweledtake2.model.TileStatus;
 import be.kdg.bejeweledtake2.view.options.OptionsPresenter;
 import be.kdg.bejeweledtake2.view.options.OptionsView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -19,6 +26,37 @@ public class GamePresenter {
         updateView();
     }
     private void updateView() {
+        for (int x = 0; x < 8; x++) {
+            for (int y = 0; y < 8; y++) {
+                Tile currentTile = this.model.getCurrentGame().getPlayingField()[x][y];
+                Button huidigeButton = new Button();
+                huidigeButton.setPrefWidth(51*view.SCREEN_RATIO);
+                huidigeButton.setPrefHeight(51*view.SCREEN_RATIO);
+
+                if (currentTile.getStatus() == TileStatus.SELECTED) {
+                    huidigeButton.setBackground(new Background(new BackgroundImage(view.imgBlueGemAnim, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+                }
+                else {
+                    huidigeButton.setBackground(new Background(new BackgroundImage(view.imgBlueGem, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+                }
+
+                huidigeButton.setFont(new Font("Arial", 20));
+                int mijnX = x;
+                int mijnY = y;
+                huidigeButton.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+
+                        //Alle code die te maken heeft met de aanpassing van het model moet eigenlijk in de modelklasses staan.
+                        //We laten
+                        System.out.println("U heeft geklikt op de coordinaat: (" + mijnX + "," + mijnY + ")");
+                        model.getCurrentGame().tileClicked(mijnX, mijnY);
+                        updateView();
+                    }
+                });
+                view.getGameGrid().add(huidigeButton, x, y);
+            }
+        }
     }
     private void addEventHandlers() {
         this.view.getBtnNewGame().setOnAction(new EventHandler<ActionEvent>() {
