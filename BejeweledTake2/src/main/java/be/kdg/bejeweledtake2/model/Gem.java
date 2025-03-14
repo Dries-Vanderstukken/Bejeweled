@@ -4,6 +4,11 @@ public class Gem {
     private GemColor gemColor;
     private GemMutation gemMutation;
 
+    public Gem(GemColor gemColor, GemMutation gemMutation) {
+        this.gemColor = gemColor;
+        this.gemMutation = gemMutation;
+    }
+
     public GemColor getGemColor() {
         return gemColor;
     }

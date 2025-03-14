@@ -1,6 +1,7 @@
 package be.kdg.bejeweledtake2;
 
 import be.kdg.bejeweledtake2.model.BejeweledModel;
+import be.kdg.bejeweledtake2.model.Game;
 import be.kdg.bejeweledtake2.view.start.StartPresenter;
 import be.kdg.bejeweledtake2.view.start.StartView;
 import javafx.application.Application;
@@ -13,7 +14,7 @@ public class Bejeweled extends Application {
     @Override
     public void start(Stage mijnStage) throws IOException{
         this.mijnStage = mijnStage;
-        BejeweledModel model = new BejeweledModel();
+        BejeweledModel model = new BejeweledModel(new Game());
         StartView view = new StartView();
         mijnStage.setScene(new Scene(view));
         StartPresenter presenter = new StartPresenter(model, view);
