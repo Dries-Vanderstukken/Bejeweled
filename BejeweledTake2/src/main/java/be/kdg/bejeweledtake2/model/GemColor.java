@@ -7,5 +7,6 @@ public enum GemColor {
     PINK,
     RED,
     WHITE,
+    YELLOW,
     NONE
 }
