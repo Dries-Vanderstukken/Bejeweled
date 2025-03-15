@@ -33,11 +33,11 @@ public class Game {
         while (!checkAllMatching().isEmpty()) {
             removeMatching(checkAllMatching());
         }
-        printField();
+        /* printField();
         System.out.println(  playingField[4][4].getGem().getGemColor() + "4,4 will bomba the following" + bombaVictims(playingField[4][4]));
 
         removeMatching(bombaVictims(playingField[4][4]));
-        printField();
+        printField(); */
     }
 
 
@@ -159,6 +159,13 @@ public class Game {
         // Something fucked up about the order of this one
         for (Tile tile : matchingTiles) {
             tile.setStatus(TileStatus.EMPTY);
+            if(tile.getGem().getGemMutation() == GemMutation.BOMB){
+                List<Tile> currentBombaVictims = bombaVictims(tile);
+                for(Tile victim : currentBombaVictims){
+                    victim.setStatus(TileStatus.EMPTY);
+                }
+
+            }
         }
         List<Tile> emptyTiles = new ArrayList<>();
         do {
