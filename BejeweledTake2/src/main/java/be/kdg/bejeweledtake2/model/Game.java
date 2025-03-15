@@ -33,7 +33,27 @@ public class Game {
         while (!checkAllMatching().isEmpty()) {
             removeMatching(checkAllMatching());
         }
+        printField();
+        System.out.println(  playingField[4][4].getGem().getGemColor() + "4,4 will bomba the following" + bombaVictims(playingField[4][4]));
+
+        removeMatching(bombaVictims(playingField[4][4]));
+        printField();
     }
+
+
+
+    public List<Tile> bombaVictims(Tile selectedTile){
+        List<Tile> bombaList = new ArrayList<>();
+        for(int i = -1; i < 2; i++){
+            for( int j = -1; j < 2; j++){
+                bombaList.add(playingField[selectedTile.getColumn()+i][selectedTile.getRow()+j]);
+            }
+        }
+        return(bombaList);
+        
+    }
+    
+
 
     public void setSelectedTile(Tile selectedTile) {
         clearSelectedTile();
@@ -357,6 +377,8 @@ public class Game {
     }
 
     public void printField(){
+        // ok the new left is the old top now and the new bottom is the old right (ever since we flipped rows and columns to make them [X][Y] instead of the old [Y][X])
+        // This makes it a bit less practical, but we ball (just flip your screen 90° to the right, genius move)
         System.out.println("------Field------");
         for (int i = 0; i < playingField.length; i++) {
             for (int j = 0; j < playingField[i].length; j++) {
