@@ -55,6 +55,7 @@ public class GameView extends BorderPane {
     Image imgRedGemBomb;
     Image imgWhiteGemBomb;
     Image imgYellowGemBomb;
+    Image imgHyperCube;
     GridPane gameGrid;
 
     public Label getLblScore() {return lblScore;}
@@ -101,6 +102,8 @@ public class GameView extends BorderPane {
         this.imgRedGemBomb = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/BombGems/Red_Bomb_Gem.png")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, true);
         this.imgWhiteGemBomb = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/BombGems/White_Bomb_Gem.png")), 50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, false);
         this.imgYellowGemBomb = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/BombGems/Yellow_Bomb_Gem.png")),50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, false);
+
+        this.imgHyperCube = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/gameAssets/BombGems/HyperCube.gif")),50 * SCREEN_RATIO, 50 * SCREEN_RATIO, true, false);
 
         this.gameGrid = new GridPane();
     }

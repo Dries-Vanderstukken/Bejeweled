@@ -10,6 +10,5 @@ public class Timer {
 
     public void startTimer(){
         currentTime = START_TIME;
-
     }
 }

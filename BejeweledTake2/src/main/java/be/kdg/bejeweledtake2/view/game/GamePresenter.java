@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -63,14 +64,27 @@ public class GamePresenter {
                 Image[] animatedGems = {view.imgBlueGemAnim, view.imgGreenGemAnim, view.imgPinkGemAnim, view.imgWhiteGemAnim, view.imgOrangeGemAnim, view.imgRedGemAnim, view.imgYellowGemAnim};
                 Image[] bombGems = {view.imgBlueGemBomb, view.imgGreenGemBomb, view.imgPinkGemBomb, view.imgWhiteGemBomb, view.imgOrangeGemBomb, view.imgRedGemBomb, view.imgYellowGemBomb};
 
-                if (currentTile.getGem().getGemMutation() == GemMutation.BOMB){
-                    huidigeButton.setBackground(new Background(new BackgroundImage(bombGems[gemIndex], BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+                if (currentTile.getGem().getGemMutation() == GemMutation.NONE){
+                    if (currentTile.getStatus() == TileStatus.SELECTED) {
+                        huidigeButton.setBackground(new Background(new BackgroundImage(animatedGems[gemIndex], BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+                    } else {
+                        huidigeButton.setBackground(new Background(new BackgroundImage(normalGems[gemIndex], BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+                    }
+                } else {
+                    if (currentTile.getGem().getGemMutation() == GemMutation.BOMB){
+                        huidigeButton.setBackground(new Background(new BackgroundImage(bombGems[gemIndex], BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+                    } else {
+                        huidigeButton.setBackground(new Background(new BackgroundImage(view.imgHyperCube, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+                    }
                 }
-                else if (currentTile.getStatus() == TileStatus.SELECTED) {
-                    huidigeButton.setBackground(new Background(new BackgroundImage(animatedGems[gemIndex], BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+
+                if (currentTile.getStatus() == TileStatus.SELECTED) {
+                    huidigeButton.setBorder(new Border(new BorderStroke(Color.AQUA, BorderStrokeStyle.SOLID, new CornerRadii(1), new BorderWidths(5))));
                 }
-                else {
-                    huidigeButton.setBackground(new Background(new BackgroundImage(normalGems[gemIndex], BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+                else if (currentTile.getStatus() == TileStatus.POSSIBLE_MOVE) {
+                    huidigeButton.setBorder(new Border(new BorderStroke(Color.LIGHTGREEN, BorderStrokeStyle.SOLID, new CornerRadii(1), new BorderWidths(5))));
+                } else if (currentTile.getStatus() == TileStatus.EMPTY) {
+                    huidigeButton.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, new CornerRadii(1), new BorderWidths(5))));
                 }
 
                 int mijnX = x;
