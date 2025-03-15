@@ -16,14 +16,19 @@ public class Game {
     private Timer timer;
     private Score score;
     private Tile selectedTile;
+    private GamePresenter presenter;
+
+    public void setPresenter(GamePresenter presenter) {
+        this.presenter = presenter;
+    }
 
     // When a new game is created it gets a timer, a score and a playing field (which gets randomized after)
     public Game() {
-        this.playingField = new Tile[8][8];
-        this.timer = new Timer();
-        this.score = new Score();
-        this.score.setScore(0);
-        this.timer.startTimer();
+        playingField = new Tile[8][8];
+        timer = new Timer(this);
+        score = new Score();
+        score.setScore(0);
+        timer.startTimer();
         randomize();
         while (!checkAllMatching().isEmpty()) {
             removeMatching(checkAllMatching());
@@ -400,5 +405,9 @@ public class Game {
         } else {
             removeMatching(tile1Matching);
         }
+    }
+
+    public void gameOver(){
+        
     }
 }

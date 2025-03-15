@@ -17,8 +17,8 @@ public class GamePresenter {
     private BejeweledModel model;
     private GameView view;
     public GamePresenter(BejeweledModel model, GameView view) {
-        System.out.println("bruh presetntde");
         this.model = model;
+        this.model.getCurrentGame().setPresenter(this);
         this.view = view;
         addEventHandlers();
         updateView();
