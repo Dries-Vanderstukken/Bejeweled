@@ -7,7 +7,6 @@ import javafx.util.Duration;
 
 public class GameTimer {
     private Game associatedGame;
-    private boolean running = false;
     private final int START_TIME = 60;
     private long currentTime = START_TIME;
 
@@ -18,7 +17,6 @@ public class GameTimer {
         }
 
         if (currentTime < 0){
-            running = false;
             associatedGame.gameOver();
             stopTimer();
         }
@@ -38,12 +36,10 @@ public class GameTimer {
     }
 
     public void startTimer(){
-        running = true;
         timer.setCycleCount(Animation.INDEFINITE);
         timer.play();
     }
     public void stopTimer() {
-        running = false;
         timer.stop();
     }
 }

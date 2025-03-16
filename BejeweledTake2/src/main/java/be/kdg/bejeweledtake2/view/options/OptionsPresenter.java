@@ -7,11 +7,6 @@ import be.kdg.bejeweledtake2.view.manual.ManualPresenter;
 import be.kdg.bejeweledtake2.view.manual.ManualView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.layout.Region;
-import javafx.stage.Stage;
-
-import java.awt.*;
-
 
 public class OptionsPresenter {
     private BejeweledModel model;
@@ -31,7 +26,7 @@ public class OptionsPresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 CreditsView creditsView = new CreditsView();
-                CreditsPresenter creditsPresenter = new CreditsPresenter(model, creditsView);
+                new CreditsPresenter(model, creditsView);
                 view.getScene().setRoot(creditsView);
             }
         });
@@ -40,7 +35,7 @@ public class OptionsPresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 ManualView manualView = new ManualView();
-                ManualPresenter manualPresenter = new ManualPresenter(model, manualView);
+                new ManualPresenter(model, manualView);
                 view.getScene().setRoot(manualView);
             }
         });

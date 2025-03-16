@@ -65,7 +65,7 @@ public class CreditsView extends BorderPane {
 
         // Load the background image
         Image backgroundImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/optionsAssets/Options menu.png")),300*2, 189*2, true, true); // Use the correct path to your image
-        BackgroundImage myBackground = new BackgroundImage(
+        new BackgroundImage(
                 backgroundImage,
                 null, // No specific repeat
                 null, // No specific stretch

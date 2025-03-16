@@ -1,14 +1,13 @@
 package be.kdg.bejeweledtake2;
 
 import be.kdg.bejeweledtake2.model.BejeweledModel;
-import be.kdg.bejeweledtake2.model.Game;
 import be.kdg.bejeweledtake2.view.start.StartPresenter;
 import be.kdg.bejeweledtake2.view.start.StartView;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class Bejeweled extends Application {
@@ -26,6 +25,7 @@ public class Bejeweled extends Application {
         mijnStage.show();
         mijnStage.setMinHeight(mijnStage.getHeight());
         mijnStage.setMinWidth(mijnStage.getWidth());
+        mijnStage.getScene().setFill(Color.GREY);
     }
 
     public static void main(String[] args) {

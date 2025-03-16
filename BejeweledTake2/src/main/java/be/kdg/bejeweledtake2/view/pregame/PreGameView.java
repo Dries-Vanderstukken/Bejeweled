@@ -62,7 +62,7 @@ public class PreGameView extends BorderPane {
         lblGameOver.setTextFill(Color.WHITE);
         lblGameOver.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 70*SCREEN_RATIO));
 
-        txtNameField.setPromptText("Your Name");
+        txtNameField.setPromptText("Your name");
         txtNameField.setMinSize(50*WIDTH_RATIO,50*HEIGHT_RATIO);
 
         HBox mijnHBox = new HBox();

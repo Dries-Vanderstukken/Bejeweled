@@ -1,12 +1,15 @@
 package be.kdg.bejeweledtake2.view.scores;
 
 import be.kdg.bejeweledtake2.model.BejeweledModel;
-import be.kdg.bejeweledtake2.view.credits.CreditsView;
+import be.kdg.bejeweledtake2.model.Score;
 import be.kdg.bejeweledtake2.view.start.StartPresenter;
 import be.kdg.bejeweledtake2.view.start.StartView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.List;
 
 public class ScoresPresenter {
     private BejeweledModel model;
@@ -19,6 +22,22 @@ public class ScoresPresenter {
     }
 
     private void updateView() {
+        List<Score> HighscoreList = null;
+        try {
+            HighscoreList = model.getCurrentGame().getScore().handleHighscores();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        int i = 0;
+            String[] highScoreNames = new String[10];
+            int[] highscores = new int[10];
+            for (Score score : HighscoreList) {
+                highScoreNames[i] = score.getPlayerName();
+                highscores[i]  = score.getScore();
+                i++;
+            }
+            view.setHighscores(highscores);
+            view.setHighscoreNames(highScoreNames);
         view.getLblScoreLabel().setText("Your Score: "+model.getCurrentGame().getScore().getScore());
     }
 
@@ -27,7 +46,7 @@ public class ScoresPresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 StartView startView = new StartView();
-                StartPresenter startPresenter = new StartPresenter(model, startView);
+                new StartPresenter(model, startView);
                 view.getScene().setRoot(startView);
                 Stage stage = (Stage) startView.getScene().getWindow();
                 stage.setMaximized(true);

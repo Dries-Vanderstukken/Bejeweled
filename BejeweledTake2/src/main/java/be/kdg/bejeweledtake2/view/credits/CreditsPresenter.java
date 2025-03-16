@@ -22,7 +22,7 @@ public class CreditsPresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 OptionsView optionsView = new OptionsView();
-                OptionsPresenter optionsPresenter = new OptionsPresenter(model, optionsView);
+                new OptionsPresenter(model, optionsView);
                 view.getScene().setRoot(optionsView);
             }
         });

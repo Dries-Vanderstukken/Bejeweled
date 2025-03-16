@@ -125,7 +125,7 @@ public class GamePresenter {
                 System.out.println("geklikt op options");
 
                 OptionsView optionsView = new OptionsView();
-                OptionsPresenter optionsPresenter = new OptionsPresenter(model, optionsView);
+                new OptionsPresenter(model, optionsView);
                 Stage optionsStage = new Stage();
                 optionsStage.initModality(Modality.APPLICATION_MODAL);
                 optionsStage.setScene(new Scene(optionsView));
@@ -162,7 +162,7 @@ public class GamePresenter {
 
     public void showHighScores(){
         ScoresView scoresView = new ScoresView();
-        ScoresPresenter scoresPresenter = new ScoresPresenter(model, scoresView);
+        new ScoresPresenter(model, scoresView);
 
         //getting screensize so you can resize everything according to the screen resolution
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

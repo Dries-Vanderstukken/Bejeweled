@@ -6,7 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
@@ -32,7 +31,6 @@ public class StartView extends BorderPane {
         //resize constants
         final double WIDTH_RATIO = (screenSize.getWidth() / 320);
         final double HEIGHT_RATIO = (screenSize.getHeight() / 240);
-        final double SCREEN_RATIO = Math.min(WIDTH_RATIO, HEIGHT_RATIO)-0.1;
 
         Image startScreen = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/startAssets/BejeweledStartScreen.png")));
 
@@ -52,7 +50,5 @@ public class StartView extends BorderPane {
         this.setBottom(mijnVBox);
         mijnVBox.setAlignment(Pos.CENTER);
         mijnVBox.setPadding(new Insets(30*HEIGHT_RATIO));
-
-        JFrame mijnJFrame = new JFrame();
     }
 }
