@@ -8,11 +8,15 @@ import javafx.util.Duration;
 public class GameTimer {
     private Game associatedGame;
     private boolean running = false;
-    private final int START_TIME = 300;
+    private final int START_TIME = 60;
     private long currentTime = START_TIME;
 
     Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
         currentTime--;
+        if (currentTime > START_TIME) {
+            currentTime = START_TIME;
+        }
+
         if (currentTime < 0){
             running = false;
             associatedGame.gameOver();
@@ -27,6 +31,10 @@ public class GameTimer {
 
     public long getCurrentTime() {
         return currentTime;
+    }
+
+    public void incrementTime(long increment){
+        currentTime += increment;
     }
 
     public void startTimer(){

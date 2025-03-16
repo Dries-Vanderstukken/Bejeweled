@@ -15,6 +15,7 @@ public class Game {
     private Score score;
     private Tile selectedTile;
     private GamePresenter presenter;
+    private int matchesThisMove = 0;
 
     public void setPresenter(GamePresenter presenter) {
         this.presenter = presenter;
@@ -40,11 +41,6 @@ public class Game {
         while (!checkAllMatching().isEmpty()) {
             removeTiles(checkAllMatching());
         }
-        /* printField();
-        System.out.println(  playingField[4][4].getGem().getGemColor() + "4,4 will bomba the following" + bombaVictims(playingField[4][4]));
-
-        removeMatching(bombaVictims(playingField[4][4]));
-        printField(); */
     }
 
     public List<Tile> bombaVictims(Tile selectedTile){
@@ -400,6 +396,7 @@ public class Game {
     public void tileClicked(int xCoordinate,int yCoordinate){
         Tile clickedTile = playingField[xCoordinate][yCoordinate];
         int scoreBefore = score.getScore();
+        matchesThisMove = 0;
         if (clickedTile.getStatus() == TileStatus.NONE) {
             this.setSelectedTile(clickedTile);
         }
@@ -418,6 +415,34 @@ public class Game {
                 }
             }
             clearSelectedTile();
+        }
+        switch (matchesThisMove){
+            case 0,1:
+                break;
+            case 2,3,4:
+                score.incrementScore((matchesThisMove-1)*30);
+                timer.incrementTime(1);
+                break;
+            case 5:
+                score.incrementScore(150);
+                timer.incrementTime(1);
+                break;
+            case 6:
+                score.incrementScore(210);
+                timer.incrementTime(2);
+                break;
+            case 7:
+                score.incrementScore(300);
+                timer.incrementTime(2);
+                break;
+            case 8:
+                score.incrementScore(450);
+                timer.incrementTime(3);
+                break;
+            default:
+                score.incrementScore(600);
+                timer.incrementTime(3);
+                break;
         }
         int scoreAfter = score.getScore();
         int totalMoveScore = scoreAfter - scoreBefore;
@@ -444,25 +469,26 @@ public class Game {
         if (tile1Matching.size() == 3) {
             removeTiles(tile1Matching);
             score.incrementScore(30);
+            timer.incrementTime(1);
         } else if (tile1Matching.size() == 4) {
             tile.getGem().setGemMutation(GemMutation.BOMB);
             tile1Matching.remove(tile);
             removeTiles(tile1Matching);
             score.incrementScore(60);
+            timer.incrementTime(1);
         } else if (tile1Matching.size() >=5) {
             tile.getGem().setGemMutation(GemMutation.HYPER_CUBE);
             tile.getGem().setGemColor(GemColor.NONE);
             tile1Matching.remove(tile);
             removeTiles(tile1Matching);
-            score.incrementScore(20*tile1Matching.size());
-        } else {
-            removeTiles(tile1Matching);
+            score.incrementScore((tile1Matching.size() == 5) ? 90 : 150);
+            timer.incrementTime(2);
         }
+        matchesThisMove++;
     }
 
     public void gameOver(){
-
-
         presenter.showHighScores();
+        timer.stopTimer();
     }
 }

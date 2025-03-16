@@ -150,7 +150,7 @@ public class GameView extends BorderPane {
         btnQuitGame.setBackground(new Background(new BackgroundImage(imgQuitGame, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
         btnQuitGame.setMinSize(imgQuitGame.getWidth(), imgQuitGame.getHeight());
 
-        lblTimer.setText("5:00");
+        lblTimer.setText("1:00");
         lblTimer.setTextAlignment(TextAlignment.CENTER);
         lblTimer.setTextFill(Color.LAVENDER);
         lblTimer.setAlignment(Pos.CENTER);

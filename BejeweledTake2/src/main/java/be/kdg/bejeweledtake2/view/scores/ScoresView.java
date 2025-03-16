@@ -21,13 +21,11 @@ public class ScoresView extends BorderPane {
 
     Button btnMainMenu;
     Label lblScoreLabel;
-    TextField txtNameField;
     String[] highscoreNames;
     int[] highscores;
 
     public int[] getHighscores() {return highscores;}
     public String[] getHighscoreNames() {return highscoreNames;}
-    public TextField getTxtNameField() {return txtNameField;}
     public Label getLblScoreLabel() {return lblScoreLabel;}
     public Button getBtnMainMenu() {return btnMainMenu;}
 
@@ -39,7 +37,6 @@ public class ScoresView extends BorderPane {
     private void initialiseNodes() {
         this.btnMainMenu = new Button();
         this.lblScoreLabel = new Label();
-        this.txtNameField = new TextField();
         this.highscoreNames = new String[10];
         this.highscores = new int[10];
     }
@@ -79,8 +76,6 @@ public class ScoresView extends BorderPane {
         lblScoreLabel.setTextFill(Color.WHITE);
         lblScoreLabel.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 70*SCREEN_RATIO));
 
-        txtNameField.setPromptText("Your Name");
-
         //High scores
         VBox mijnVBox = new VBox();
         for (int i=0; i<10; i++){
@@ -118,14 +113,9 @@ public class ScoresView extends BorderPane {
         mijnVBox.setBackground(new Background(new BackgroundImage(imgHighscores, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
         mijnVBox.setAlignment(Pos.CENTER);
 
-        HBox mijnHBox = new HBox();
-        mijnHBox.setAlignment(Pos.CENTER);
-        mijnHBox.getChildren().addAll(lblScoreLabel, txtNameField);
-        mijnHBox.setSpacing(50);
-
         VBox topVBox = new VBox();
         topVBox.setAlignment(Pos.CENTER);
-        topVBox.getChildren().addAll(lblGameOver, mijnHBox);
+        topVBox.getChildren().addAll(lblGameOver, lblScoreLabel);
         topVBox.setSpacing(10);
         topVBox.setPadding(new Insets(100*SCREEN_RATIO,0,-100*SCREEN_RATIO,0));
 
