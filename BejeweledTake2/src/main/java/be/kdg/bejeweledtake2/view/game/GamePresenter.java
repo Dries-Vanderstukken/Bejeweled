@@ -3,6 +3,8 @@ package be.kdg.bejeweledtake2.view.game;
 import be.kdg.bejeweledtake2.model.*;
 import be.kdg.bejeweledtake2.view.options.OptionsPresenter;
 import be.kdg.bejeweledtake2.view.options.OptionsView;
+import be.kdg.bejeweledtake2.view.scores.ScoresPresenter;
+import be.kdg.bejeweledtake2.view.scores.ScoresView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -12,6 +14,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.awt.*;
 
 public class GamePresenter {
     private BejeweledModel model;
@@ -110,7 +114,7 @@ public class GamePresenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 System.out.println("geklikt op new game");
-                model.newGame();
+                model.getCurrentGame().gameOver();
                 updateView();
             }
         });
@@ -141,5 +145,37 @@ public class GamePresenter {
     }
     public void addWindowEventHandlers(){
 
+    }
+
+    public void updateScore(int score, int totalMoveScore){
+        view.lblScore.setText(Integer.toString(score));
+        if (totalMoveScore != 0) {
+            view.lblScoreBall.setText("+" + Integer.toString(totalMoveScore));
+        }
+    }
+
+    public void updateTimer(long currentTime){
+        long seconds = currentTime % 60;
+        long minutes = (currentTime - seconds) / 60;
+        view.lblTimer.setText(minutes+":"+seconds);
+    }
+
+    public void showHighScores(){
+        ScoresView scoresView = new ScoresView();
+        ScoresPresenter scoresPresenter = new ScoresPresenter(model, scoresView);
+
+        //getting screensize so you can resize everything according to the screen resolution
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        //resize constants
+        final double WIDTH_RATIO = (screenSize.getWidth() / 2039);
+        final double HEIGHT_RATIO = (screenSize.getHeight() / 1755);
+        final double SCREEN_RATIO = Math.min(WIDTH_RATIO, HEIGHT_RATIO)-0.1;
+
+        view.getScene().setRoot(scoresView);
+        Stage stage = (Stage) scoresView.getScene().getWindow();
+        stage.setMinHeight(1755*SCREEN_RATIO+23);
+        stage.setMinWidth(2039*SCREEN_RATIO+10);
+        stage.setMaximized(false);
     }
 }

@@ -30,10 +30,12 @@ public class StartPresenter {
                 System.out.println("geklikt op play");
 
                 model.newGame();
+
                 GameView gameView = new GameView();
                 GamePresenter gamePresenter = new GamePresenter(model, gameView);
                 view.getScene().setRoot(gameView);
 
+                model.getCurrentGame().startTimer();
             }
         });
     }

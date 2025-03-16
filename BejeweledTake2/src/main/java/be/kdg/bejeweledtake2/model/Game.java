@@ -1,19 +1,17 @@
 package be.kdg.bejeweledtake2.model;
 
 import be.kdg.bejeweledtake2.view.game.GamePresenter;
-import be.kdg.bejeweledtake2.view.game.GameView;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class Game {
 
     // playingField[column][row]
     // column values count from top to bottom (like a spreadsheet would :D)
     private Tile[][] playingField;
-    private Timer timer;
+    private GameTimer timer;
     private Score score;
     private Tile selectedTile;
     private GamePresenter presenter;
@@ -21,17 +19,26 @@ public class Game {
     public void setPresenter(GamePresenter presenter) {
         this.presenter = presenter;
     }
+    public GamePresenter getPresenter() {
+        return presenter;
+    }
+    public Score getScore() {
+        return score;
+    }
+
+    public void startTimer() {
+        timer.startTimer();
+    }
 
     // When a new game is created it gets a timer, a score and a playing field (which gets randomized after)
     public Game() {
         playingField = new Tile[8][8];
-        timer = new Timer(this);
+        timer = new GameTimer(this);
         score = new Score();
         score.setScore(0);
-        timer.startTimer();
         randomize();
         while (!checkAllMatching().isEmpty()) {
-            removeMatching(checkAllMatching());
+            removeTiles(checkAllMatching());
         }
         /* printField();
         System.out.println(  playingField[4][4].getGem().getGemColor() + "4,4 will bomba the following" + bombaVictims(playingField[4][4]));
@@ -40,20 +47,17 @@ public class Game {
         printField(); */
     }
 
-
-
     public List<Tile> bombaVictims(Tile selectedTile){
         List<Tile> bombaList = new ArrayList<>();
         for(int i = -1; i < 2; i++){
             for( int j = -1; j < 2; j++){
-                bombaList.add(playingField[selectedTile.getColumn()+i][selectedTile.getRow()+j]);
+                if (selectedTile.getColumn()+i >= 0 && selectedTile.getRow()+j >= 0) {
+                    bombaList.add(playingField[selectedTile.getColumn() + i][selectedTile.getRow() + j]);
+                }
             }
         }
         return(bombaList);
-        
     }
-    
-
 
     public void setSelectedTile(Tile selectedTile) {
         clearSelectedTile();
@@ -80,7 +84,7 @@ public class Game {
         GemColor currentSelectColor = selectedTile.getGem().getGemColor();
         int x = selectedTile.getColumn();
         int y = selectedTile.getRow();
-
+        boolean hyperCube = (selectedTile.getGem().getGemMutation() == GemMutation.HYPER_CUBE);
         //check top
         if (y != 0) {
             Tile topTile = playingField[x][y - 1];
@@ -88,10 +92,9 @@ public class Game {
             topTile.getGem().setGemColor(currentSelectColor);
             selectedTile.getGem().setGemColor(topColor);
 
-            if (!checkMatching(topTile).isEmpty()){
+            if (!checkMatching(topTile).isEmpty() || hyperCube){
                 possibleMoves.add(topTile);
-            }
-            if (!checkMatching(selectedTile).isEmpty()){
+            } else if (!checkMatching(selectedTile).isEmpty()){
                 possibleMoves.add(topTile);
             }
 
@@ -105,10 +108,9 @@ public class Game {
             rightTile.getGem().setGemColor(currentSelectColor);
             selectedTile.getGem().setGemColor(rightColor);
 
-            if (!checkMatching(rightTile).isEmpty()){
+            if (!checkMatching(rightTile).isEmpty() || hyperCube){
                 possibleMoves.add(rightTile);
-            }
-            if (!checkMatching(selectedTile).isEmpty()){
+            } else if (!checkMatching(selectedTile).isEmpty()){
                 possibleMoves.add(rightTile);
             }
 
@@ -122,10 +124,9 @@ public class Game {
             bottomTile.getGem().setGemColor(currentSelectColor);
             selectedTile.getGem().setGemColor(bottomColor);
 
-            if (!checkMatching(bottomTile).isEmpty()){
+            if (!checkMatching(bottomTile).isEmpty() || hyperCube){
                 possibleMoves.add(bottomTile);
-            }
-            if (!checkMatching(selectedTile).isEmpty()){
+            } else if (!checkMatching(selectedTile).isEmpty()){
                 possibleMoves.add(bottomTile);
             }
 
@@ -139,10 +140,9 @@ public class Game {
             leftTile.getGem().setGemColor(currentSelectColor);
             selectedTile.getGem().setGemColor(leftColor);
 
-            if (!checkMatching(leftTile).isEmpty()){
+            if (!checkMatching(leftTile).isEmpty() || hyperCube) {
                 possibleMoves.add(leftTile);
-            }
-            if (!checkMatching(selectedTile).isEmpty()){
+            } else if (!checkMatching(selectedTile).isEmpty()){
                 possibleMoves.add(leftTile);
             }
 
@@ -155,16 +155,18 @@ public class Game {
         return possibleMoves;
     }
 
-    public void removeMatching(List<Tile> matchingTiles) {
+    public void removeTiles(List<Tile> tilesToRemove) {
         // Something fucked up about the order of this one
-        for (Tile tile : matchingTiles) {
+        for (Tile tile : tilesToRemove) {
             tile.setStatus(TileStatus.EMPTY);
             if(tile.getGem().getGemMutation() == GemMutation.BOMB){
                 List<Tile> currentBombaVictims = bombaVictims(tile);
                 for(Tile victim : currentBombaVictims){
-                    victim.setStatus(TileStatus.EMPTY);
+                    if (!tilesToRemove.contains(victim)) {
+                        score.incrementScore(10);
+                        victim.setStatus(TileStatus.EMPTY);
+                    }
                 }
-
             }
         }
         List<Tile> emptyTiles = new ArrayList<>();
@@ -232,15 +234,14 @@ public class Game {
 
 
     public void swap(Tile tile1, Tile tile2) {
-        boolean correctSwap;
-            GemColor tempColor;
-            GemMutation tempMutation;
-            tempColor = tile1.getGem().getGemColor();
-            tempMutation = tile1.getGem().getGemMutation();
-            tile1.getGem().setGemColor(tile2.getGem().getGemColor());
-            tile1.getGem().setGemMutation(tile2.getGem().getGemMutation());
-            tile2.getGem().setGemColor(tempColor);
-            tile2.getGem().setGemMutation(tempMutation);
+        GemColor tempColor;
+        GemMutation tempMutation;
+        tempColor = tile1.getGem().getGemColor();
+        tempMutation = tile1.getGem().getGemMutation();
+        tile1.getGem().setGemColor(tile2.getGem().getGemColor());
+        tile1.getGem().setGemMutation(tile2.getGem().getGemMutation());
+        tile2.getGem().setGemColor(tempColor);
+        tile2.getGem().setGemMutation(tempMutation);
     }
 
     public List<Tile> checkAllMatching() {
@@ -398,13 +399,19 @@ public class Game {
 
     public void tileClicked(int xCoordinate,int yCoordinate){
         Tile clickedTile = playingField[xCoordinate][yCoordinate];
+        int scoreBefore = score.getScore();
         if (clickedTile.getStatus() == TileStatus.NONE) {
             this.setSelectedTile(clickedTile);
         }
         else if (clickedTile.getStatus() == TileStatus.POSSIBLE_MOVE) {
-            swap(selectedTile, clickedTile);
-            handleRemoval(selectedTile);
-            handleRemoval(clickedTile);
+            if (selectedTile.getGem().getGemMutation() == GemMutation.HYPER_CUBE){
+                GemColor removedColor = clickedTile.getGem().getGemColor();
+                handleHyperCube(removedColor);
+            } else {
+                swap(selectedTile, clickedTile);
+                handleRemoval(selectedTile);
+                handleRemoval(clickedTile);
+            }
             while (!checkAllMatching().isEmpty()){
                 for (Tile tile : checkAllMatching()) {
                     handleRemoval(tile);
@@ -412,31 +419,50 @@ public class Game {
             }
             clearSelectedTile();
         }
+        int scoreAfter = score.getScore();
+        int totalMoveScore = scoreAfter - scoreBefore;
+        presenter.updateScore(scoreAfter, totalMoveScore);
+    }
+
+    public void handleHyperCube(GemColor removedColor){
+        List<Tile> tilesToRemove = new ArrayList<Tile>();
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (playingField[i][j].getGem().getGemColor() == removedColor){
+                    tilesToRemove.add(playingField[i][j]);
+                }
+            }
+        }
+        tilesToRemove.add(selectedTile);
+        score.incrementScore(10*tilesToRemove.size());
+        removeTiles(tilesToRemove);
     }
 
     public void handleRemoval(Tile tile){
         List<Tile> tile1Matching = checkMatching(tile);
         System.out.println(tile1Matching.size());
         if (tile1Matching.size() == 3) {
-            removeMatching(tile1Matching);
+            removeTiles(tile1Matching);
             score.incrementScore(30);
         } else if (tile1Matching.size() == 4) {
             tile.getGem().setGemMutation(GemMutation.BOMB);
             tile1Matching.remove(tile);
-            removeMatching(tile1Matching);
+            removeTiles(tile1Matching);
             score.incrementScore(60);
         } else if (tile1Matching.size() >=5) {
             tile.getGem().setGemMutation(GemMutation.HYPER_CUBE);
             tile.getGem().setGemColor(GemColor.NONE);
             tile1Matching.remove(tile);
-            removeMatching(tile1Matching);
+            removeTiles(tile1Matching);
             score.incrementScore(20*tile1Matching.size());
         } else {
-            removeMatching(tile1Matching);
+            removeTiles(tile1Matching);
         }
     }
 
     public void gameOver(){
-        
+
+
+        presenter.showHighScores();
     }
 }

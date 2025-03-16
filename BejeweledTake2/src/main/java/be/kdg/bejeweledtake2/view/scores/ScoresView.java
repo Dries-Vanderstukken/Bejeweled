@@ -40,8 +40,8 @@ public class ScoresView extends BorderPane {
         this.btnMainMenu = new Button();
         this.lblScoreLabel = new Label();
         this.txtNameField = new TextField();
-        String[] highscoreNames = new String[10];
-        int[] highscores = new int[10];
+        this.highscoreNames = new String[10];
+        this.highscores = new int[10];
     }
 
     private void layoutNodes() {
@@ -67,7 +67,13 @@ public class ScoresView extends BorderPane {
         button.setAlignment(Pos.CENTER);
         button.setPadding(new Insets(-100*SCREEN_RATIO,0,100*SCREEN_RATIO,0));
 
-        lblScoreLabel.setText("Your Score: XXXXX");
+        Label lblGameOver = new Label("Game Over!");
+        lblGameOver.setTextAlignment(TextAlignment.CENTER);
+        lblGameOver.setAlignment(Pos.CENTER);
+        lblGameOver.setTextFill(Color.WHITE);
+        lblGameOver.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 70*SCREEN_RATIO));
+
+        lblScoreLabel.setText("Your Score: 0");
         lblScoreLabel.setTextAlignment(TextAlignment.CENTER);
         lblScoreLabel.setAlignment(Pos.CENTER);
         lblScoreLabel.setTextFill(Color.WHITE);
@@ -116,12 +122,17 @@ public class ScoresView extends BorderPane {
         mijnHBox.setAlignment(Pos.CENTER);
         mijnHBox.getChildren().addAll(lblScoreLabel, txtNameField);
         mijnHBox.setSpacing(50);
-        mijnHBox.setPadding(new Insets(100*SCREEN_RATIO,0,-100*SCREEN_RATIO,0));
+
+        VBox topVBox = new VBox();
+        topVBox.setAlignment(Pos.CENTER);
+        topVBox.getChildren().addAll(lblGameOver, mijnHBox);
+        topVBox.setSpacing(10);
+        topVBox.setPadding(new Insets(100*SCREEN_RATIO,0,-100*SCREEN_RATIO,0));
 
         this.setBackground(new Background(new BackgroundImage(imgBackground, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
         this.setCenter(mijnVBox);
         mijnVBox.setPadding(new Insets(150*SCREEN_RATIO,0,0,0));
         this.setBottom(button);
-        this.setTop(mijnHBox);
+        this.setTop(topVBox);
     }
 }

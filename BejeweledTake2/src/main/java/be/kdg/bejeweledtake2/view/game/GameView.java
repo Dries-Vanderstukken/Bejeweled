@@ -131,7 +131,7 @@ public class GameView extends BorderPane {
         lblScore.setAlignment(Pos.CENTER);
         lblScore.setTextFill(javafx.scene.paint.Color.LIGHTBLUE);
         lblScore.setFont(javafx.scene.text.Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 30*SCREEN_RATIO));
-        lblScore.setText("1234");
+        lblScore.setText("0");
 
         btnNewGame.setBackground(new Background(new BackgroundImage(imgNewGame, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
         btnNewGame.setMinSize(imgNewGame.getWidth(), imgNewGame.getHeight());
@@ -145,12 +145,12 @@ public class GameView extends BorderPane {
         lblScoreBall.setAlignment(Pos.CENTER);
         lblScoreBall.setTextFill(javafx.scene.paint.Color.LAVENDER);
         lblScoreBall.setFont(javafx.scene.text.Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 30*SCREEN_RATIO));
-        lblScoreBall.setText("+30");
+        lblScoreBall.setText("+0");
 
         btnQuitGame.setBackground(new Background(new BackgroundImage(imgQuitGame, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
         btnQuitGame.setMinSize(imgQuitGame.getWidth(), imgQuitGame.getHeight());
 
-        lblTimer.setText("XX:XX");
+        lblTimer.setText("5:00");
         lblTimer.setTextAlignment(TextAlignment.CENTER);
         lblTimer.setTextFill(Color.LAVENDER);
         lblTimer.setAlignment(Pos.CENTER);

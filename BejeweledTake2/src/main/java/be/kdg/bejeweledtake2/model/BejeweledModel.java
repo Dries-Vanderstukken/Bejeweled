@@ -4,10 +4,6 @@ public class BejeweledModel {
 
     private Game currentGame;
 
-    public BejeweledModel(Game currentGame) {
-        this.currentGame = currentGame;
-    }
-
     public Game getCurrentGame() {
         return currentGame;
     }

@@ -6,6 +6,7 @@ import be.kdg.bejeweledtake2.view.start.StartPresenter;
 import be.kdg.bejeweledtake2.view.start.StartView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.stage.Stage;
 
 public class ScoresPresenter {
     private BejeweledModel model;
@@ -18,6 +19,7 @@ public class ScoresPresenter {
     }
 
     private void updateView() {
+        view.getLblScoreLabel().setText("Your Score: "+model.getCurrentGame().getScore().getScore());
     }
 
     private void addEventHandlers() {
@@ -26,7 +28,9 @@ public class ScoresPresenter {
             public void handle(ActionEvent actionEvent) {
                 StartView startView = new StartView();
                 StartPresenter startPresenter = new StartPresenter(model, startView);
-
+                view.getScene().setRoot(startView);
+                Stage stage = (Stage) startView.getScene().getWindow();
+                stage.setMaximized(true);
             }
         });
     }
