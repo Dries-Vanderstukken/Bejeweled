@@ -99,7 +99,6 @@ public class GamePresenter {
 
                         //Alle code die te maken heeft met de aanpassing van het model moet eigenlijk in de modelklasses staan.
                         //We laten
-                        System.out.println("U heeft geklikt op de coordinaat: (" + mijnX + "," + mijnY + ")");
                         model.getCurrentGame().tileClicked(mijnX, mijnY);
                         updateView();
                     }
@@ -113,7 +112,6 @@ public class GamePresenter {
         this.view.getBtnNewGame().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                System.out.println("geklikt op new game");
                 model.getCurrentGame().gameOver();
                 updateView();
             }
@@ -122,7 +120,6 @@ public class GamePresenter {
         this.view.getBtnOptions().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                System.out.println("geklikt op options");
 
                 OptionsView optionsView = new OptionsView();
                 new OptionsPresenter(model, optionsView);
@@ -137,7 +134,6 @@ public class GamePresenter {
         this.view.getBtnQuitGame().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                System.out.println("geklikt op quit");
                 System.exit(0);
             }
         });

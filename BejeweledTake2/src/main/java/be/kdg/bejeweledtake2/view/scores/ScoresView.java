@@ -29,16 +29,12 @@ public class ScoresView extends BorderPane {
     public Button getBtnMainMenu() {return btnMainMenu;}
 
     public void setHighscoreNames(String[] highscoreNames) {
-        System.out.println(highscoreNames[0]);
         this.highscoreNames = highscoreNames;
-        System.out.println(this.highscoreNames[0]);
         layoutNodes();
     }
 
     public void setHighscores(int[] highscores) {
-        System.out.println(highscores[0]);
         this.highscores = highscores;
-        System.out.println(this.highscores[0]);
         layoutNodes();
     }
 
@@ -98,7 +94,6 @@ public class ScoresView extends BorderPane {
             lbl.setMaxWidth(600*SCREEN_RATIO);
             lbl.setPrefWidth(600*SCREEN_RATIO);
             lbl.setText((i+1)+". "+highscoreNames[i]);
-            System.out.println(highscoreNames[i]);
             lbl.setTextAlignment(TextAlignment.LEFT);
             lbl.setAlignment(Pos.CENTER_LEFT);
             lbl.setTextFill(Color.WHITE);

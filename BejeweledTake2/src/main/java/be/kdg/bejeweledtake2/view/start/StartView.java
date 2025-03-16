@@ -29,7 +29,7 @@ public class StartView extends BorderPane {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
         //resize constants
-        final double WIDTH_RATIO = (screenSize.getWidth() / 320);
+        screenSize.getWidth();
         final double HEIGHT_RATIO = (screenSize.getHeight() / 240);
 
         Image startScreen = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/startAssets/BejeweledStartScreen.png")));

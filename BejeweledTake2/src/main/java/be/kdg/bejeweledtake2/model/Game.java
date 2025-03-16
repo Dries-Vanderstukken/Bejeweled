@@ -45,17 +45,12 @@ public class Game {
     }
 
     public void randomize() {
-        System.out.println("randomizing");
         for (int i = 0; i < 8; i++) {
-            System.out.println(i);
             for (int j = 0; j < 8; j++) {
-                System.out.println(i + " " + j);
                 playingField[i][j] = new Tile(TileStatus.NONE, i, j);
                 playingField[i][j].setGem(new Gem(colorRandomizer(), GemMutation.NONE));
-                System.out.println(playingField[i][j].getGem().getGemColor());
             }
         }
-        System.out.println("done");
     }
 
     // Makes the board no longer have any selected tiles (does not change anything about their gems!!!)
@@ -94,7 +89,6 @@ public class Game {
     // handleRemoval: removes any matches a given tile might have and increments score/timer accordingly
     public void handleRemoval(Tile tile){
         List<Tile> tile1Matching = checkMatching(tile);
-        System.out.println(tile1Matching.size());
         if (tile1Matching.size() == 3) {
             removeTiles(tile1Matching);
             scoreInstance.incrementScore(30);
@@ -262,7 +256,6 @@ public class Game {
 
         if (amountAdjGemsHorizontal >= 3) {
             adjTilesH.add(tile);
-            System.out.println("remove these tiles: " + adjTilesH);
             return adjTilesH;
         } else {
             return Collections.emptyList();
@@ -312,7 +305,6 @@ public class Game {
 
         if (amountAdjGemsVertical >= 3){
             adjTilesV.add(tile);
-            System.out.println("remove these tiles: "+adjTilesV);
             return adjTilesV;
         } else {
         return Collections.emptyList();
@@ -345,7 +337,6 @@ public class Game {
             }
             clearSelectedTile();
         }
-        System.out.println(matchesThisMove);
         switch (matchesThisMove){
             case 0,1:
                 break;

@@ -24,7 +24,6 @@ public class StartPresenter {
         this.view.getBtnPlay().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                System.out.println("geklikt op play");
                 //getting screensize so you can resize everything according to the screen resolution
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 

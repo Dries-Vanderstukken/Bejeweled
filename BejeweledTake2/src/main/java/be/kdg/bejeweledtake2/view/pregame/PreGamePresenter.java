@@ -27,7 +27,7 @@ public class PreGamePresenter {
             @Override
             public void handle(KeyEvent keyEvent) {
                 String currentText = view.txtNameField.getText();
-                if(currentText.equals("") || !currentText.matches("[a-zA-Z0-9]+")){
+                if(currentText.isEmpty() || !currentText.matches("[a-zA-Z0-9]+")){
                     view.getBtnContinue().setDisable(true);
                 }else{
                     view.getBtnContinue().setDisable(false);
